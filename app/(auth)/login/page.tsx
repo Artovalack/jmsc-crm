@@ -19,7 +19,7 @@ export default async function LoginPage({ searchParams }: Props) {
       <form action={signIn} className="form-stack">
         <label className="field"><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>
         <label className="field"><span>Password</span><input name="password" type="password" autoComplete="current-password" minLength={8} required /></label>
-        <button className="button button-primary button-wide" type="submit">Sign in <span>↗</span></button>
+        <button className="button button-primary button-wide" type="submit">Sign in</button>
       </form>
       <p className="auth-switch">New to the workspace? <Link href="/signup">Request an account</Link></p>
       <p className="auth-footnote">Accounts require approval by a JMSC workspace administrator.</p>
