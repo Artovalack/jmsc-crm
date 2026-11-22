@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Layers3, Plus, Search } from "lucide-react";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
 import QueryError from "@/components/query-error";
@@ -30,7 +30,7 @@ export default async function OrdersPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHeading eyebrow="IDEAS INTO FINISHED WORK" title="Orders & projects" description="Keep the brief, owner, due date, and next milestone in view." action={<Link className="button button-primary" href="/orders/new">＋ New project</Link>} />
+      <PageHeading eyebrow="IDEAS INTO FINISHED WORK" title="Orders & projects" description="Keep the brief, owner, due date, and next milestone in view." action={<Link className="button button-primary" href="/orders/new"><Plus size={15} /> New project</Link>} />
       <Notice error={params.error} message={params.message} />
       <div className="metric-strip"><span><strong>{activeOrders.length}</strong> in motion</span><span><strong>{ordersResult.data.filter((order) => order.status === "Client review").length}</strong> awaiting client</span><span><strong>{ordersResult.data.filter((order) => order.status === "With print partner").length}</strong> with print partners</span></div>
       <div className="toolbar">
@@ -46,7 +46,7 @@ export default async function OrdersPage({ searchParams }: Props) {
             <td>{clients.get(order.client_id) || "Client"}</td><td><StatusBadge value={order.status} /></td>
             <td>{owners.get(order.owner_id ?? "") || "Unassigned"}</td><td>{formatDate(order.due_date)}</td><td>{order.priority}</td>
           </tr>)}</tbody>
-        </table></div> : <div className="empty-state"><span>▤</span><strong>No projects in this view</strong><p>Start a project to give the team one place to track scope and next steps.</p><Link href="/orders/new" className="button button-secondary button-small">Create a project</Link></div>}
+        </table></div> : <div className="empty-state"><Layers3 size={22} /><strong>No projects in this view</strong><p>Start a project to give the team one place to track scope and next steps.</p><Link href="/orders/new" className="button button-secondary button-small">Create a project</Link></div>}
       </section>
     </>
   );

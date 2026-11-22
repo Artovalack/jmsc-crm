@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { AlertTriangle, Plus, Printer } from "lucide-react";
 import { updateProductionStatus } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -33,7 +34,7 @@ export default async function PartnerDetailPage({ params, searchParams }: Props)
       <Notice error={notice.error} message={notice.message} />
       <div className="detail-grid">
         <div className="record-column">
-          <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">PRODUCTION HISTORY</span><h2>Partner handoffs</h2></div><Link className="panel-link" href="/partners/handoffs/new">＋ New handoff</Link></div>
+          <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">PRODUCTION HISTORY</span><h2>Partner handoffs</h2></div><Link className="panel-link" href="/partners/handoffs/new"><Plus size={14} /> New handoff</Link></div>
             {handoffsResult.data.length ? <div className="card-list">{handoffsResult.data.map((handoff) => <article className="info-card" key={handoff.id}>
               <div className="info-card-top"><h3>{orders.get(handoff.order_id) || "Project"}</h3><StatusBadge value={handoff.status} /></div>
               <p>{handoff.quantity} pcs · {handoff.specifications}</p>
@@ -45,10 +46,10 @@ export default async function PartnerDetailPage({ params, searchParams }: Props)
                 <label className="field"><span>Quality / schedule notes</span><textarea name="quality_notes" rows={2} defaultValue={handoff.quality_notes} /></label>
                 <button className="button button-secondary button-small">Save handoff update</button>
               </form>
-            </article>)}</div> : <div className="empty-state"><span>⌁</span><strong>No jobs with this partner yet</strong><p>Create a handoff after the client has approved the production files.</p></div>}
+            </article>)}</div> : <div className="empty-state"><Printer size={22} /><strong>No jobs with this partner yet</strong><p>Create a handoff after the client has approved the production files.</p></div>}
           </section>
           <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">RISK & QUALITY NOTES</span><h2>Partner history</h2></div><Link className="panel-link" href="/partners/risks">Risk log ↗</Link></div>
-            {risksResult.data.length ? <div className="card-list">{risksResult.data.map((risk) => <article className="info-card" key={risk.id}><div className="info-card-top"><h3>{risk.category} · {risk.severity}</h3><StatusBadge value={risk.status} /></div><p>{risk.summary}</p><div className="info-card-foot"><span>{orders.get(risk.order_id ?? "") || "Partner-wide"}</span><span>{formatDate(risk.created_at)}</span></div></article>)}</div> : <div className="empty-state"><span>✳</span><strong>No risk history</strong><p>Log quality and schedule issues early, while there&apos;s time to adapt.</p></div>}
+            {risksResult.data.length ? <div className="card-list">{risksResult.data.map((risk) => <article className="info-card" key={risk.id}><div className="info-card-top"><h3>{risk.category} · {risk.severity}</h3><StatusBadge value={risk.status} /></div><p>{risk.summary}</p><div className="info-card-foot"><span>{orders.get(risk.order_id ?? "") || "Partner-wide"}</span><span>{formatDate(risk.created_at)}</span></div></article>)}</div> : <div className="empty-state"><AlertTriangle size={22} /><strong>No risk history</strong><p>Log quality and schedule issues early, while there&apos;s time to adapt.</p></div>}
           </section>
         </div>
         <section className="panel detail-card"><span className="eyebrow">CONTACT & CAPABILITIES</span><div className="detail-rows" style={{ marginTop: 10 }}>

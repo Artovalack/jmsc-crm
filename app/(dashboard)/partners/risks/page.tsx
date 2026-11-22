@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AlertTriangle } from "lucide-react";
 import { createPartnerRisk, updatePartnerRisk } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -35,7 +36,7 @@ export default async function PartnerRisksPage({ searchParams }: Props) {
             <p>{risk.summary}</p>
             <div className="info-card-foot"><span>{partners.get(risk.partner_id) || "Partner"} · {orders.get(risk.order_id ?? "") || "Partner-wide"}</span><span>{formatDate(risk.created_at)}</span></div>
             <StatusForm action={updatePartnerRisk} id={risk.id} status={risk.status} options={riskStatuses} label="Update risk" />
-          </article>)}</div> : <div className="empty-state"><span>✳</span><strong>No risks recorded</strong><p>Log a risk early so the team has time to manage expectations.</p></div>}
+          </article>)}</div> : <div className="empty-state"><AlertTriangle size={22} /><strong>No risks recorded</strong><p>Log a risk early so the team has time to manage expectations.</p></div>}
         </section>
         <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">ADD A RISK</span><h2>Log partner issue</h2></div></div>
           {!partnersResult.data.length ? <div className="notice-inline">Add a print partner before creating a risk record.</div> : <form action={createPartnerRisk} className="form-stack">

@@ -1,12 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SetupNotice() {
   return (
     <main className="setup-page">
       <div className="setup-card">
         <Link className="wordmark" href="/">
-          <span className="wordmark-mark">JM<span>.</span></span>
-          <span><strong>JMSC</strong><small>MEDIA WORKS</small></span>
+          <Image className="brand-logo brand-logo-setup" src="/jmsc-logo.png" alt="JMSC Media Works" width={96} height={104} priority />
         </Link>
         <span className="eyebrow">ONE LAST SETUP STEP</span>
         <h1>Connect your<br /><em>Supabase workspace.</em></h1>

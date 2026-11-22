@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { Users } from "lucide-react";
 import { updateMemberAccess } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -41,7 +42,7 @@ export default async function SettingsPage({ searchParams }: Props) {
               <button className="button button-secondary button-small">Save</button>
             </form></td>
           </tr>)}
-        </tbody></table></div> : <div className="empty-state"><span>◎</span><strong>No team accounts found</strong><p>Create an account through signup, then activate the first admin using the SQL in the README.</p></div>}
+        </tbody></table></div> : <div className="empty-state"><Users size={22} /><strong>No team accounts found</strong><p>Create an account through signup, then activate the first admin using the SQL in the README.</p></div>}
       </section>
     </>
   );

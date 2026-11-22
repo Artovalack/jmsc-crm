@@ -5,7 +5,7 @@ import { updateCatalogItem } from "@/app/actions";
 import PageHeading from "@/components/page-heading";
 import Notice from "@/components/notice";
 import QueryError from "@/components/query-error";
-import { Search } from "lucide-react";
+import { Layers3, Palette, Plus, Printer, Search } from "lucide-react";
 
 type Props = { searchParams: Promise<{ q?: string; category?: string; error?: string; message?: string }> };
 
@@ -22,7 +22,7 @@ export default async function CatalogPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHeading eyebrow="THE JMSC SERVICE SPECTRUM" title="Service catalog" description="Keep digital work and print-ready production clear in one place." action={<Link className="button button-primary" href="/catalog/new">＋ Add a service</Link>} />
+      <PageHeading eyebrow="THE JMSC SERVICE SPECTRUM" title="Service catalog" description="Keep digital work and print-ready production clear in one place." action={<Link className="button button-primary" href="/catalog/new"><Plus size={15} /> Add a service</Link>} />
       <Notice error={params.error} message={params.message} />
       <div className="toolbar">
         <form className="toolbar-search" method="get">
@@ -36,11 +36,11 @@ export default async function CatalogPage({ searchParams }: Props) {
         <span className="panel-meta">{items.filter((item) => item.active).length} active services</span>
       </div>
       {items.length ? <div className="catalog-grid">{items.map((item, index) => <article className={`catalog-card ${!item.active ? "catalog-inactive" : ""}`} key={item.id}>
-        <div className="catalog-card-top"><span className={`catalog-symbol catalog-symbol-${index % 4 + 1}`}>{item.is_physical ? "▧" : "✳"}</span><span className={`catalog-state ${item.active ? "" : "catalog-state-off"}`}>{item.active ? "AVAILABLE" : "PAUSED"}</span></div>
+        <div className="catalog-card-top"><span className={`catalog-symbol catalog-symbol-${index % 4 + 1}`}>{item.is_physical ? <Printer size={17} /> : <Palette size={17} />}</span><span className={`catalog-state ${item.active ? "" : "catalog-state-off"}`}>{item.active ? "AVAILABLE" : "PAUSED"}</span></div>
         <span className="eyebrow">{item.category.toUpperCase()} · {item.is_physical ? "PRINT-READY" : "DIGITAL"}</span>
         <h2>{item.name}</h2><p>{item.description || "No service notes yet."}</p>
         <form action={updateCatalogItem} className="catalog-card-foot"><input type="hidden" name="id" value={item.id} /><input type="hidden" name="active" value={item.active ? "false" : "true"} /><span>{item.is_physical ? "External print partner may be required" : "Studio-delivered digital work"}</span><button className="panel-link" type="submit">{item.active ? "Pause" : "Activate"}</button></form>
-      </article>)}</div> : <section className="panel"><div className="empty-state"><span>✳</span><strong>Start your service catalog</strong><p>Add the creative services clients come to JMSC for.</p><Link className="button button-secondary button-small" href="/catalog/new">Add first service</Link></div></section>}
+      </article>)}</div> : <section className="panel"><div className="empty-state"><Layers3 size={22} /><strong>Start your service catalog</strong><p>Add the creative services clients come to JMSC for.</p><Link className="button button-secondary button-small" href="/catalog/new">Add first service</Link></div></section>}
     </>
   );
 }

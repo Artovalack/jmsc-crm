@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FileCheck2 } from "lucide-react";
 import { updateOrderStatus } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -51,7 +52,7 @@ export default async function OrderDetailPage({ params, searchParams }: Props) {
           </section>
           <section className="panel detail-card">
             <div className="panel-heading"><div><span className="eyebrow">DESIGN APPROVAL</span><h2>Proofs & revisions</h2></div><Link className="panel-link" href={`/proofs/${order.id}`}>Open proof room ↗</Link></div>
-            {proofsResult.data.length ? <div className="card-list">{proofsResult.data.map((proof) => <div className="info-card" key={proof.id}><div className="info-card-top"><h3>Version {proof.version} · {proof.file_name}</h3><StatusBadge value={proof.status} /></div><div className="info-card-foot"><span>Uploaded {formatDate(proof.submitted_at)}</span></div></div>)}</div> : <div className="empty-state"><span>▧</span><strong>No proofs shared yet</strong><p>Upload an approved design preview to begin the client feedback trail.</p></div>}
+            {proofsResult.data.length ? <div className="card-list">{proofsResult.data.map((proof) => <div className="info-card" key={proof.id}><div className="info-card-top"><h3>Version {proof.version} · {proof.file_name}</h3><StatusBadge value={proof.status} /></div><div className="info-card-foot"><span>Uploaded {formatDate(proof.submitted_at)}</span></div></div>)}</div> : <div className="empty-state"><FileCheck2 size={22} /><strong>No proofs shared yet</strong><p>Upload an approved design preview to begin the client feedback trail.</p></div>}
           </section>
         </div>
         <div className="record-column">

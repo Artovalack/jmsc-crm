@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import { convertLead, updateLeadStatus } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -28,7 +28,7 @@ export default async function LeadsPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHeading eyebrow="NEW WORK STARTS HERE" title="Leads & inquiries" description="Every good project begins with a conversation." action={<Link href="/leads/new" className="button button-primary">＋ Add a lead</Link>} />
+      <PageHeading eyebrow="NEW WORK STARTS HERE" title="Leads & inquiries" description="Every good project begins with a conversation." action={<Link href="/leads/new" className="button button-primary"><Plus size={15} /> Add a lead</Link>} />
       <Notice error={params.error} message={params.message} />
       <div className="toolbar">
         <form className="toolbar-search" method="get">

@@ -1,3 +1,4 @@
+import { Building2, Info } from "lucide-react";
 import { createB2BOpportunity, updateB2BStatus } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -25,7 +26,7 @@ export default async function B2BPage({ searchParams }: Props) {
     <>
       <PageHeading eyebrow="REGIONAL OUTSOURCING" title="B2B pipeline" description="Position JMSC as a reliable creative production partner for regional print shops." />
       <Notice error={params.error} message={params.message} />
-      <div className="phase-note"><span>✳</span><span><strong>Opportunity fit:</strong> vector layout support, print-ready assets, and overflow help for partners with production backlogs. Track volume and next action before promising capacity.</span></div>
+      <div className="phase-note"><Info size={16} /><span><strong>Opportunity fit:</strong> vector layout support, print-ready assets, and overflow help for partners with production backlogs. Track volume and next action before promising capacity.</span></div>
       <div className="detail-grid">
         <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">RELATIONSHIPS IN PROGRESS</span><h2>Outsourcing opportunities</h2></div><span className="panel-meta">{opportunitiesResult.data.length} records</span></div>
           {opportunitiesResult.data.length ? <div className="card-list">{opportunitiesResult.data.map((opportunity) => <article className="info-card" key={opportunity.id}>
@@ -40,7 +41,7 @@ export default async function B2BPage({ searchParams }: Props) {
             </form>
             {opportunity.next_action && <div className="next-action-note"><b>Next:</b> {opportunity.next_action}</div>}
             <small className="cell-secondary">Added {formatDate(opportunity.created_at)}</small>
-          </article>)}</div> : <div className="empty-state"><span>↗</span><strong>No B2B opportunities yet</strong><p>Start with a regional shop that needs overflow layout or vector support.</p></div>}
+          </article>)}</div> : <div className="empty-state"><Building2 size={22} /><strong>No B2B opportunities yet</strong><p>Start with a regional shop that needs overflow layout or vector support.</p></div>}
         </section>
         <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">A THOUGHTFUL FIRST STEP</span><h2>Add an opportunity</h2></div></div>
           <form action={createB2BOpportunity} className="form-stack">

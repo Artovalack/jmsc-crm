@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FileCheck2 } from "lucide-react";
 import { createProof, updateProofReview } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -46,7 +47,7 @@ export default async function OrderProofsPage({ params, searchParams }: Props) {
               <label className="field"><span>Feedback / revision notes</span><textarea name="client_feedback" rows={2} defaultValue={proof.client_feedback} placeholder="Summarize what the client said and what changes are needed." /></label>
               <button className="button button-secondary button-small" type="submit">Save review</button>
             </form>
-          </article>)}</div> : <div className="empty-state"><span>▧</span><strong>No proof versions yet</strong><p>Upload the first review image or PDF when the design is ready.</p></div>}
+          </article>)}</div> : <div className="empty-state"><FileCheck2 size={22} /><strong>No proof versions yet</strong><p>Upload the first review image or PDF when the design is ready.</p></div>}
         </section>
         <section className="panel detail-card">
           <div className="panel-heading"><div><span className="eyebrow">NEW DESIGN VERSION</span><h2>Upload a proof</h2></div></div>

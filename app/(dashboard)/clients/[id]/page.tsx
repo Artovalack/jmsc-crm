@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FolderKanban, Plus } from "lucide-react";
 import { notFound } from "next/navigation";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -24,7 +25,7 @@ export default async function ClientDetailPage({ params, searchParams }: Props) 
 
   return (
     <>
-      <PageHeading eyebrow={client.location.toUpperCase()} title={client.full_name} description={client.organization || "Individual client"} action={<Link href="/orders/new" className="button button-primary">＋ New project</Link>} />
+      <PageHeading eyebrow={client.location.toUpperCase()} title={client.full_name} description={client.organization || "Individual client"} action={<Link href="/orders/new" className="button button-primary"><Plus size={15} /> New project</Link>} />
       <Notice error={notice.error} message={notice.message} />
       <div className="detail-grid">
         <section className="panel detail-card">
@@ -40,7 +41,7 @@ export default async function ClientDetailPage({ params, searchParams }: Props) 
           {orders.length ? <div className="card-list">{orders.map((order) => <Link className="info-card" href={`/orders/${order.id}`} key={order.id}>
             <div className="info-card-top"><h3>{order.title}</h3><StatusBadge value={order.status} /></div>
             <div className="info-card-foot"><span>Due {formatDate(order.due_date)}</span><span>{order.priority} priority</span></div>
-          </Link>)}</div> : <div className="empty-state"><span>▤</span><strong>No projects linked yet</strong><p>New work for this client will collect here.</p></div>}
+          </Link>)}</div> : <div className="empty-state"><FolderKanban size={22} /><strong>No projects linked yet</strong><p>New work for this client will collect here.</p></div>}
         </section>
         <section className="panel detail-card">
           <div className="panel-heading"><div><span className="eyebrow">KEEP IT CURRENT</span><h2>Edit client</h2></div></div>

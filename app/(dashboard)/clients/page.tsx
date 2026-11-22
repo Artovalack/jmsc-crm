@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Search } from "lucide-react";
+import { Plus, Search, Users } from "lucide-react";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
 import QueryError from "@/components/query-error";
@@ -20,7 +20,7 @@ export default async function ClientsPage({ searchParams }: Props) {
 
   return (
     <>
-      <PageHeading eyebrow="THE PEOPLE BEHIND THE WORK" title="Clients" description="Build relationships worth returning to." action={<Link className="button button-primary" href="/clients/new">＋ Add a client</Link>} />
+      <PageHeading eyebrow="THE PEOPLE BEHIND THE WORK" title="Clients" description="Build relationships worth returning to." action={<Link className="button button-primary" href="/clients/new"><Plus size={15} /> Add a client</Link>} />
       <Notice error={params.error} message={params.message} />
       <div className="toolbar">
         <form className="toolbar-search" method="get">
@@ -43,7 +43,7 @@ export default async function ClientsPage({ searchParams }: Props) {
             <td>{new Intl.DateTimeFormat("en-PH", { month: "short", day: "numeric", year: "numeric" }).format(new Date(client.created_at))}</td>
             <td><Link className="panel-link" href={`/clients/${client.id}`}>Open ↗</Link></td>
           </tr>)}</tbody>
-        </table></div> : <div className="empty-state"><span>◎</span><strong>No clients in this view</strong><p>Add a client or change the search filters to see matching records.</p><Link className="button button-secondary button-small" href="/clients/new">Add first client</Link></div>}
+        </table></div> : <div className="empty-state"><Users size={22} /><strong>No clients in this view</strong><p>Add a client or change the search filters to see matching records.</p><Link className="button button-secondary button-small" href="/clients/new">Add first client</Link></div>}
       </section>
     </>
   );

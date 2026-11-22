@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { Users } from "lucide-react";
 import { createOrder } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -20,7 +21,7 @@ export default async function NewOrderPage({ searchParams }: Props) {
   ]);
   const resultError = clientsResult.error || catalogResult.error || profilesResult.error || leadsResult.error;
   if (resultError) return <div className="notice notice-error">{resultError.message}</div>;
-  if (!clientsResult.data.length) return <div className="empty-state"><span>◎</span><strong>Add a client first</strong><p>Projects need a client record. You can create one from a won lead or add a client directly.</p><div className="toolbar"><Link className="button button-secondary" href="/clients/new">Add client</Link><Link className="button button-primary" href="/leads">Open leads</Link></div></div>;
+  if (!clientsResult.data.length) return <div className="empty-state"><Users size={22} /><strong>Add a client first</strong><p>Projects need a client record. You can create one from a won lead or add a client directly.</p><div className="toolbar"><Link className="button button-secondary" href="/clients/new">Add client</Link><Link className="button button-primary" href="/leads">Open leads</Link></div></div>;
   return (
     <>
       <PageHeading eyebrow="MAKE ROOM FOR GOOD WORK" title="Start a project" description="Carry the agreed scope into a clear, owned delivery plan." />

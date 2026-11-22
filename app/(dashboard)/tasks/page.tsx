@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ClipboardList } from "lucide-react";
 import { createTask, updateTaskCompletion } from "@/app/actions";
 import Notice from "@/components/notice";
 import PageHeading from "@/components/page-heading";
@@ -38,7 +39,7 @@ export default async function TasksPage({ searchParams }: Props) {
             <form action={updateTaskCompletion}><input type="hidden" name="id" value={task.id} /><input type="hidden" name="completed" value={task.completed_at ? "no" : "yes"} /><button className={`task-toggle ${task.completed_at ? "task-toggle-done" : ""}`} type="submit" aria-label={task.completed_at ? `Reopen ${task.title}` : `Complete ${task.title}`}>{task.completed_at ? "✓" : ""}</button></form>
             <span className="task-copy"><strong>{task.title}</strong><small>{task.order_id ? orders.get(task.order_id) : task.lead_id ? leads.get(task.lead_id) : "Unlinked"} · {members.get(task.assignee_id ?? "") || "Unassigned"}</small></span>
             <time>{formatDate(task.due_on)}</time>
-          </div>)}</div> : <div className="empty-state"><span>☷</span><strong>{params.filter === "completed" ? "A fresh page" : "All caught up"}</strong><p>{params.filter === "completed" ? "Completed follow-ups will collect here." : "Create a task when a project or lead needs a next step."}</p></div>}
+          </div>)}</div> : <div className="empty-state"><ClipboardList size={22} /><strong>{params.filter === "completed" ? "A fresh page" : "All caught up"}</strong><p>{params.filter === "completed" ? "Completed follow-ups will collect here." : "Create a task when a project or lead needs a next step."}</p></div>}
         </section>
         {params.filter !== "completed" && <section className="panel detail-card"><div className="panel-heading"><div><span className="eyebrow">ONE CLEAR NEXT STEP</span><h2>Add a task</h2></div></div>
           <form action={createTask} className="form-stack">
