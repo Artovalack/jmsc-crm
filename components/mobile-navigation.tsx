@@ -12,6 +12,7 @@ import type { LucideIcon } from "lucide-react";
 import type { Profile } from "@/types/database";
 import { signOut } from "@/app/actions";
 import { initials } from "@/lib/format";
+import NavigationLinkStatus from "@/components/navigation-link-status";
 
 const studioLinks: { href: string; label: string; icon: LucideIcon }[] = [
   { href: "/dashboard", label: "Overview", icon: LayoutDashboard },
@@ -50,7 +51,7 @@ function NavigationLink({
       aria-current={active ? "page" : undefined}
       onClick={onNavigate}
     >
-      <Icon size={17} strokeWidth={1.8} aria-hidden="true" />
+      <NavigationLinkStatus label={label} Icon={Icon} />
       <span>{label}</span>
     </Link>
   );

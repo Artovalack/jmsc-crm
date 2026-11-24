@@ -7,6 +7,7 @@ import {
   LayoutDashboard, Settings2, Users, Workflow,
 } from "lucide-react";
 import SidebarTooltip from "@/components/sidebar-tooltip";
+import NavigationLinkStatus from "@/components/navigation-link-status";
 
 const icons = {
   overview: LayoutDashboard,
@@ -31,7 +32,7 @@ export default function NavItem({ href, label, icon, collapsed = false }: { href
   return (
     <SidebarTooltip label={label} enabled={collapsed}>
       <Link href={href} className={`nav-item ${active ? "nav-item-active" : ""}`} aria-label={label} aria-current={active ? "page" : undefined}>
-        <Icon size={17} strokeWidth={1.7} aria-hidden="true" />
+        <NavigationLinkStatus label={label} Icon={Icon} />
         <span>{label}</span>
       </Link>
     </SidebarTooltip>

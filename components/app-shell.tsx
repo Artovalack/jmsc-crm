@@ -2,19 +2,46 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { LayoutDashboard, LogOut, PanelLeftClose } from "lucide-react";
-import { useState, type ReactNode } from "react";
+import { LayoutDashboard, LogOut, Moon, PanelLeftClose, Sun } from "lucide-react";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
 import type { Profile } from "@/types/database";
 import { signOut } from "@/app/actions";
 import NavItem from "@/components/nav-item";
 import MobileNavigation from "@/components/mobile-navigation";
 import SidebarTooltip from "@/components/sidebar-tooltip";
 
+type Theme = "dark" | "light";
+
+function getThemeSnapshot(): Theme {
+  return window.localStorage.getItem("jmsc-theme") === "dark" ? "dark" : "light";
+}
+
+function getServerThemeSnapshot(): Theme {
+  return "light";
+}
+
+function subscribeToTheme(onChange: () => void) {
+  window.addEventListener("storage", onChange);
+  window.addEventListener("jmsc-theme-change", onChange);
+  return () => {
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener("jmsc-theme-change", onChange);
+  };
+}
+
 export default function AppShell({ profile, children }: { profile: Profile; children: ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const theme = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, getServerThemeSnapshot);
   const canSeeQuotes = ["admin", "client_relations", "finance"].includes(profile.role);
+
+  function toggleTheme() {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    window.localStorage.setItem("jmsc-theme", nextTheme);
+    window.dispatchEvent(new Event("jmsc-theme-change"));
+  }
+
   return (
-    <div className={`app-shell ${sidebarCollapsed ? "sidebar-is-collapsed" : ""}`}>
+    <div className={`app-shell ${sidebarCollapsed ? "sidebar-is-collapsed" : ""}`} data-theme={theme}>
       <aside className="sidebar">
         <div className="sidebar-scroll">
           <div className="sidebar-brand-row">
@@ -82,6 +109,15 @@ export default function AppShell({ profile, children }: { profile: Profile; chil
         <header className="topbar">
           <div className="topbar-location"><span>JMSC</span><i>/</i><b>STUDIO OPERATIONS</b></div>
           <div className="topbar-right">
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <span className="secure-tag"><i /> PRIVATE TEAM SPACE</span>
             <span className="topbar-avatar">{profile.full_name.split(/\s+/).slice(0, 2).map((part) => part[0]).join("").toUpperCase() || "JM"}</span>
           </div>
