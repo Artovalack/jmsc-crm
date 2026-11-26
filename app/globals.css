@@ -1262,6 +1262,7 @@ td { padding: 15px 12px; color: #46546c; font-size: 14px; }
 }
 .app-shell[data-theme="light"] .sidebar { background: #fff; }
 .app-shell[data-theme="light"] .wordmark-light { color: #172449; }
+.app-shell[data-theme="light"] .brand-copy strong { color: #172449; }
 .app-shell[data-theme="light"] .sidebar-toggle {
   border-color: var(--workspace-line);
   color: var(--workspace-muted);
